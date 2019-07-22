@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
+using DependencyInjectionDemo;
 
 namespace DependencyInjectionDemo.Controllers
 {
@@ -7,11 +10,12 @@ namespace DependencyInjectionDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<string>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await MockDataSource.GetAll());
         }
 
         // GET api/values/5

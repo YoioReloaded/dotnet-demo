@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/dotnet/core-nightly/sdk:3.0.100-preview6
+
+RUN mkdir C:\app\dotnet-demo
+RUN cd C:\app\dotnet-demo
+
+CMD [ "pwsh" ]

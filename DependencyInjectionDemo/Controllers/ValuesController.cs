@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
-using DependencyInjectionDemo;
+using DependencyInjectionDemo.Models;
 
 namespace DependencyInjectionDemo.Controllers
 {
@@ -10,12 +11,17 @@ namespace DependencyInjectionDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public ValuesController(IConfiguration config)
+        {
+            RealDataSource.connectionString = config.GetConnectionString("CustomersDb");
+        }
+
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> Get()
+        public async Task<ActionResult<IEnumerable<Customer>>> Get()
         {
-            return Ok(await MockDataSource.GetAll());
+            return Ok(await RealDataSource.GetAll());
         }
 
         // GET api/values/5

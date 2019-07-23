@@ -1,19 +1,40 @@
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using DependencyInjectionDemo.Models;
 
 namespace DependencyInjectionDemo
 {
     public class RealDataSource
     {
-        public static Task<IEnumerable<string>> GetAll()
+        static string _connectionString = "";
+        public static string connectionString
         {
-            var t = new Task<IEnumerable<string>>( () => {
-
-                string[] data = { "value1", "value2" };
-                return data;
-            });
-            t.Start();
-            return t;
+            set
+            {
+                _connectionString = value;
+                db = createContext();
+            }
         }
+
+        static CustomersContext? db;
+
+        private static CustomersContext createContext()
+        {
+            if (0 != _connectionString.Trim().Length)
+            {
+                var optBuilder = new DbContextOptionsBuilder<CustomersContext>();
+                optBuilder.UseSqlServer(_connectionString);
+
+                return new CustomersContext(optBuilder.Options);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static async Task<IEnumerable<Customer>> GetAll() => db != null ? await db.Customers.ToListAsync() : new List<Customer>();
     }
 }

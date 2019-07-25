@@ -27,7 +27,7 @@ namespace DependencyInjectionDemo.Models
 
                 Customer[] customers = {
                     new Customer { Id = 1, Name = "Jane Doe", Account = 100.0M },
-                    new Customer { Id = 2, Name = "John smith", Account = 99.0M },
+                    new Customer { Id = 2, Name = "John Smith", Account = 99.0M },
                 };
                 _ctx.AddRange(customers);
                 _ctx.SaveChanges();

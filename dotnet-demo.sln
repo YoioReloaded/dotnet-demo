@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo", "DependencyInjectionDemo\DependencyInjectionDemo.csproj", "{62730A1D-CC23-40FF-BAE8-14B183845375}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionDemo.Tests", "DependencyInjectionDemo.Tests\DependencyInjectionDemo.Tests.csproj", "{4630B3F9-DDF6-43C2-86AD-2E0F3976B1F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{62730A1D-CC23-40FF-BAE8-14B183845375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62730A1D-CC23-40FF-BAE8-14B183845375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62730A1D-CC23-40FF-BAE8-14B183845375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4630B3F9-DDF6-43C2-86AD-2E0F3976B1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4630B3F9-DDF6-43C2-86AD-2E0F3976B1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4630B3F9-DDF6-43C2-86AD-2E0F3976B1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4630B3F9-DDF6-43C2-86AD-2E0F3976B1F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

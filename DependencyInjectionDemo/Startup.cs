@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using DependencyInjectionDemo.Models;
+
 namespace DependencyInjectionDemo
 {
     public class Startup
@@ -19,6 +21,8 @@ namespace DependencyInjectionDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>( serviceProvider => new UnitOfWork(Configuration.GetConnectionString("CustomersDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

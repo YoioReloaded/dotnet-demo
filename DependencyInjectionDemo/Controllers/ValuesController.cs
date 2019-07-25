@@ -17,9 +17,9 @@ namespace DependencyInjectionDemo.Controllers
             get { return this._data; }
         }
 
-        public ValuesController(IConfiguration config)
+        public ValuesController(IUnitOfWork unitOfWork)
         {
-            this._data = new UnitOfWork(config.GetConnectionString("CustomersDb"));
+            this._data = unitOfWork;
         }
 
 

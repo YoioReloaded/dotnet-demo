@@ -11,9 +11,15 @@ namespace DependencyInjectionDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IUnitOfWork _data;
+        private IUnitOfWork data
+        {
+            get { return this._data; }
+        }
+
         public ValuesController(IConfiguration config)
         {
-            RealDataSource.connectionString = config.GetConnectionString("CustomersDb");
+            this._data = new UnitOfWork(config.GetConnectionString("CustomersDb"));
         }
 
 
@@ -21,7 +27,8 @@ namespace DependencyInjectionDemo.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> Get()
         {
-            return Ok(await RealDataSource.GetAll());
+            // return Ok(await RealDataSource.GetAll());
+            return Ok(await data.Get<Customer>().GetAll());
         }
 
         // GET api/values/5

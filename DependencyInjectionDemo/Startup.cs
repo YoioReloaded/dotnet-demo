@@ -10,6 +10,9 @@ namespace DependencyInjectionDemo
 {
     public class Startup
     {
+        readonly string AllowSpecificOrigins = "_allowSpecificOrigins"; 
+        readonly string AllowAllOrigins = "_allowAllOrigins"; 
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,7 +25,17 @@ namespace DependencyInjectionDemo
         {
             services.AddControllers();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>( serviceProvider => new UnitOfWork(Configuration.GetConnectionString("CustomersDb")));
+            services.AddScoped<IUnitOfWork, InMemUnitOfWork>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:5000",
+                                        "https://localhost:5001");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +51,9 @@ namespace DependencyInjectionDemo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
+            app.UseCors(AllowSpecificOrigins);
 
             app.UseRouting();
 

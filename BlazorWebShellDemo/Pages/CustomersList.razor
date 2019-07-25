@@ -1,0 +1,52 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<h1>Customers list</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Account</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in customers)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.Name</td>
+                    <td>@c.Account</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    Customer[] customers;
+    string dbg;
+
+    protected override async Task OnInitAsync()
+    {
+        customers = await Http.GetJsonAsync<Customer[]>("http://localhost/api/values");
+    }
+
+    class Customer
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public decimal Account { get; set; }
+    }
+}
